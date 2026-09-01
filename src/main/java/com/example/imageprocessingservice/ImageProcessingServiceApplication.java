@@ -11,5 +11,3 @@ public class ImageProcessingServiceApplication {
     }
 
 }
-
-//test
