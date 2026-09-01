@@ -3,8 +3,7 @@ package com.myorg;
 import software.constructs.Construct;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
-// import software.amazon.awscdk.Duration;
-// import software.amazon.awscdk.services.sqs.Queue;
+import software.amazon.awscdk.services.s3.Bucket;
 
 public class InfrastructureStack extends Stack {
     public InfrastructureStack(final Construct scope, final String id) {
@@ -16,9 +15,13 @@ public class InfrastructureStack extends Stack {
 
         // The code that defines your stack goes here
 
-        // example resource
-        // final Queue queue = Queue.Builder.create(this, "InfrastructureQueue")
-        //         .visibilityTimeout(Duration.seconds(300))
-        //         .build();
+        Bucket bucket = Bucket.Builder.create(this, "MyBucket")
+                .encryption(BucketEncryption.S3_MANAGED)
+                .blockPublicAccess(BlockPublicAccess.BLOCK_ALL)
+                .versioned(true)
+                .enforceSSL(true)
+                .removalPolicy(RemovalPolicy.DESTROY)
+                .autoDeleteObjects(true)
+                .build();
     }
 }
