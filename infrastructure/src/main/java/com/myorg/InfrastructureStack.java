@@ -3,7 +3,10 @@ package com.myorg;
 import software.constructs.Construct;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
+import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.services.s3.Bucket;
+import software.amazon.awscdk.services.s3.BlockPublicAccess;
+import software.amazon.awscdk.services.s3.BucketEncryption;
 
 public class InfrastructureStack extends Stack {
     public InfrastructureStack(final Construct scope, final String id) {
@@ -19,7 +22,7 @@ public class InfrastructureStack extends Stack {
                 .encryption(BucketEncryption.S3_MANAGED)
                 .blockPublicAccess(BlockPublicAccess.BLOCK_ALL)
                 .versioned(true)
-                .enforceSSL(true)
+                .enforceSsl(true)
                 .removalPolicy(RemovalPolicy.DESTROY)
                 .autoDeleteObjects(true)
                 .build();
