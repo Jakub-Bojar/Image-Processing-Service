@@ -1,3 +1,15 @@
 spring:
   application:
     name: Image-Processing-Service
+  datasource:
+    url: ${SUPABASE_DB_URL}
+    username: ${SUPABASE_DB_USER}
+    password: ${SUPABASE_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update   # auto-creates/updates tables from your entities. Fine for dev; use migrations in prod.
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true

@@ -1,15 +1,22 @@
 package com.example.imageprocessingservice.api.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.imageprocessingservice.domain.UserRecord;
+import com.example.imageprocessingservice.repository.UserRecordRepository;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthenticationController {
 
-    @GetMapping("/hello")
-    public String sayHello(@RequestParam(value = "myName", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
+    private final UserRecordRepository repository;
+
+    public AuthenticationController(UserRecordRepository repository) {
+        this.repository = repository;
     }
 
+    @PostMapping("/register")
+    public UserRecord create(@RequestParam String name, @RequestParam String password) {
+        return repository.save(new UserRecord(name, password));
+    }
 }
