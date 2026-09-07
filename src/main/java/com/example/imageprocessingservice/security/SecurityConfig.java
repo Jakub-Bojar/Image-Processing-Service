@@ -19,34 +19,6 @@ public class SecurityConfig {
         this.jwtFilter = jwtFilter;
     }
 
-//    @Autowired
-//    private CustomUserDetailsService userDetailsService;
-//
-//    @Bean
-//    public AuthenticationManager authenticationManager(
-//            AuthenticationConfiguration config) throws Exception {
-//        return config.getAuthenticationManager();
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-//            throws Exception {
-//
-//        http.csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/auth/**").permitAll()
-//                        .anyRequest().authenticated()
-//                );
-//
-//        http.addFilterBefore(
-//                jwtFilter,
-//                UsernamePasswordAuthenticationFilter.class
-//        );
-//
-//        return http.build();
-//    }
-
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
