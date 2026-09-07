@@ -4,10 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 import java.time.Instant;
 
 @Entity
+@Data
 public class UserRecord {
 
     @Id
@@ -16,9 +18,12 @@ public class UserRecord {
 
     private String name;
 
+    private String email;
+
     private String password;
 
     private Instant createdAt = Instant.now();
+
 
     protected UserRecord() {
         // required by JPA
@@ -28,16 +33,4 @@ public class UserRecord {
         this.name = name;
         this.password = password;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() { return name; }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-
 }
