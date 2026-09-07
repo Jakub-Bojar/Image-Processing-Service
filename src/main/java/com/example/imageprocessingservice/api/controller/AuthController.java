@@ -1,22 +1,37 @@
 package com.example.imageprocessingservice.api.controller;
-
 import com.example.imageprocessingservice.domain.UserRecord;
 import com.example.imageprocessingservice.repository.UserRecordRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.imageprocessingservice.security.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AuthenticationController {
+@RequestMapping("/api/auth")
+public class AuthController {
 
-    private final UserRecordRepository repository;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    public AuthenticationController(UserRecordRepository repository) {
-        this.repository = repository;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserRecordRepository userRecordRepository;
+
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserRecord userRecord) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userRecord.getEmail(), userRecord.getPassword())
+        );
+        return jwtUtil.generateToken(userRecord.getEmail());
     }
 
     @PostMapping("/register")
-    public UserRecord create(@RequestParam String name, @RequestParam String password) {
-        return repository.save(new UserRecord(name, password));
+    public String register(@RequestBody UserRecord userRecord) {
+        userRecordRepository.save(userRecord);
+        return "User registered successfully!";
     }
 }
