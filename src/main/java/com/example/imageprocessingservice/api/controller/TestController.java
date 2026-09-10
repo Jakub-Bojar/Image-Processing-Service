@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-@GetMapping("/")
+@GetMapping
     public ResponseEntity<ApiResponseDto<?>> Test(){
     return ResponseEntity
             .status(HttpStatus.OK)
