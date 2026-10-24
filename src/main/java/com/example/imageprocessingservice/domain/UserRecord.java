@@ -28,6 +28,7 @@ public class UserRecord {
 
     private boolean enabled;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 }
