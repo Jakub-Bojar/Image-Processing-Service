@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "image", indexes = @Index(name = "idx_image_owner_created_at", columnList = "owner_id, createdAt"))
+@Table(name = "image", indexes = @Index(name = "idx_image_owner_created_at", columnList = "owner_id, created_at"))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +19,10 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private UserRecord owner;
 
     @Column(nullable = false)
     private String originalFilename;
