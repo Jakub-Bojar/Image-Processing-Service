@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsByEmail(String email) {
-        return userRecordRepository.existsByUsername(email);
+        return userRecordRepository.existsByEmail(email);
     }
 
     @Override
@@ -26,4 +26,3 @@ public class UserServiceImpl implements UserService {
         userRecordRepository.save(user);
     }
 }
-
